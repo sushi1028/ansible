@@ -1,0 +1,97 @@
+version: '3'
+services:
+  master:
+    build:
+      context: ./master
+      dockerfile: Dockerfile
+    image: ubuntu-master
+    links:
+      - slave1
+      - slave2
+      - slave3
+      - slave4
+      - slave5
+      - slave6
+    expose: 
+      - "22"
+    privileged: true
+    tty: true  
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.5 
+  slave1:
+    build:
+      context: ./slave1
+      dockerfile: Dockerfile
+    image: ubuntu-slave1
+    expose: 
+      - "22"
+    tty: true
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.6 
+  slave2:
+    build:
+      context: ./slave2
+      dockerfile: Dockerfile
+    image: ubuntu-slave2
+    expose: 
+      - "22"
+    tty: true 
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.7 
+
+  slave3:
+    build:
+      context: ./slave3
+      dockerfile: Dockerfile
+    image: ubuntu-slave3
+    expose: 
+      - "22"
+    tty: true 
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.8 
+
+  slave4:
+    build:
+      context: ./slave4
+      dockerfile: Dockerfile
+    image: ubuntu-slave4
+    expose: 
+      - "22"
+    tty: true 
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.9     
+    
+  slave5:
+    build:
+      context: ./slave5
+      dockerfile: Dockerfile
+    image: ubuntu-slave5
+    expose: 
+      - "22"
+    tty: true 
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.10 
+
+  slave6:
+    build:
+      context: ./slave6
+      dockerfile: Dockerfile
+    image: ubuntu-slave6
+    expose: 
+      - "22"
+    tty: true 
+    networks:
+      vpcbr:
+        ipv4_address: 10.5.0.11 
+networks:
+  vpcbr:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
